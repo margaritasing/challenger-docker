@@ -1,0 +1,18 @@
+# version: "3"
+# services:
+#   simple-apache:
+#     image: httpd:alpine
+#     container_name: myapache
+#     ports:
+#       - "5050:80"
+#     volumes:
+#       - ./content:/usr/local/apache2/htdocs/
+
+version: '3'
+services:
+  myapache:
+    image: simple-apache:new
+    container_name: myapache
+    ports:
+      - "8080:80"
+    restart: always
