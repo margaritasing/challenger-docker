@@ -34,11 +34,11 @@ class RequestHandler(http.server.SimpleHTTPRequestHandler):
             content_length = int(self.headers['Content-Length'])
             post_data = self.rfile.read(content_length)
             redishost = "redis"
-            redisclient = redis.Redis(host=redishost)
+            redisclient = redis.Redis(host=redis)
             redisclient.set("295devops",post_data.decode('utf-8'))
 
 
 
 handler_object = RequestHandler
-server = socketserver.TCPServer(("8080", 8080), handler_object)
+server = socketserver.TCPServer(("0.0.0.0", 8080), handler_object)
 server.serve_forever()
