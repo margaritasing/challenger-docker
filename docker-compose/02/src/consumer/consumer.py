@@ -8,17 +8,18 @@ from requests.exceptions import Timeout
 def main():
     if os.getenv("LOCAL"):
         print("Run container on local")
-        url = "http://localhost:8000"
+        url = "http://app:8000"
     else:
         print("Run container on dev env")
-        url = "http://service-flask-app"
+        url = "http://service-flask-app:8000"
     while True:
         try:
-            responde = requests.get(url, timeout=5)
-            if responde.ok:
+            headers = {'User-Agent': 'consumer.py'}
+            response = requests.get(f"{url}/", headers=headers, timeout=5)
+            if response.ok:
                 print("Response OK!!!")
             else:
-                print(f"Requests FAIL, http error code: {responde.status_code}")
+                print(f"Requests FAIL, http error code: {response.status_code}")
         except Timeout:
             print(f"Timeout error on url: {url}")
         except Exception as error:

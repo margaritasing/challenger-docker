@@ -5,13 +5,10 @@ FROM python:3.8-slim-buster
 WORKDIR /app
 
 # Copy the current directory contents into the container at /app
-COPY . /app
+COPY ./ /app/
 
 # Install any needed packages specified in requirements.txt
 RUN pip install --trusted-host pypi.python.org -r requirements.txt
 
-# Make port 8001 available to the world outside this container
-EXPOSE 8001
-
-# Run consumer.py when the container launches
+# Run the consumer.py script
 CMD ["python", "consumer.py"]
