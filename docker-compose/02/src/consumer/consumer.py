@@ -8,7 +8,7 @@ from requests.exceptions import Timeout
 def main():
     if os.getenv("LOCAL"):
         print("Run container on local")
-        url = "http://app:8000"
+        url = "http://service-flask-app:8000"
     else:
         print("Run container on dev env")
         url = "http://service-flask-app:8000"

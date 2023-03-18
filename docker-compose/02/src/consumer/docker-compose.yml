@@ -1,13 +1,34 @@
-version: '3'
+# version: '3'
+
+# services:
+#   myapp:
+#     build:
+#       context: .
+#       dockerfile: Dockerfile
+#     restart: always
+#   consumer:
+#     build:
+#       context: .
+#       dockerfile: Dockerfile
+#     restart: always
+
+version: "3.9"
 
 services:
-  myapp:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    restart: always
+  service-flask-app:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      - FLASK_APP=app.py
+      - FLASK_ENV=development
+    volumes:
+      - .:/app
+
   consumer:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    restart: always
+    build: .
+    environment:
+      - LOCAL=true
+    depends_on:
+      - service-flask-app
+
